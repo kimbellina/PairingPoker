@@ -1,0 +1,25 @@
+<h1>Listing Cards collected by <%= current_user.first_name %> <%= current_user.last_name %></h1> 
+
+<table><tr>
+  <td><b>Sort By:</b> 
+    <select id="sort_preference">
+        <option <%= "selected=selected" if @preference == "card" %> value="card">Card</option>
+        <option <%= "selected=selected" if @preference == "first" %> value="first">First Name</option>
+        <option <%= "selected=selected" if @preference == "last" %> value="last">Last Name</option>
+    </select>
+  </td>
+  <td><span id="best_hand"><b>Best Hand: </b><%= @best_hand.name %></span></td>
+  <td><span id="card_count"><b>Card Count: </b><%= current_user.card_count %></span></td>
+</tr></table>
+<table>
+  <tr>
+    <% @cards.each_with_index do |card, index| %>
+      <%= render card %>
+      <% if index%13==12 %>
+          </tr><tr>
+      <%end%>
+    <% end %>
+  </tr>
+</table>
+
+<br>

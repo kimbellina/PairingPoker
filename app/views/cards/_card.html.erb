@@ -1,0 +1,20 @@
+<% classes = "card" %>
+<% classes += " leading" if current_user.leading_card == card %>
+<% classes += " collected" if current_user.collected_cards.include? card %>
+<% classes += " no_owner" unless card.owner %>
+
+<%# classes += " best" if current_user.best_hand.include? card %>
+<% if card.owner %>
+	<td class="<%= classes %>" data-partner-id="<%=card.owner.id%>" data-partner-name="<%=card.owner.first_name%>">
+<% else %>
+	<td class="<%= classes %>">
+<% end %>
+	<%= image_tag(card.image) %>
+	<br><span>
+	<% if card.owner %>
+		<%= card.owner.first_name %><br><%= card.owner.last_name %>
+	<% else %>
+		&nbsp;<br>&nbsp;
+	<% end %>
+	</span>
+</td>
